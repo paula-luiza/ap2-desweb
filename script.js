@@ -23,6 +23,12 @@ conteudo.innerHTML = 'carregando...';
 
 document.body.appendChild(conteudo);
 
+const botaoElencoFem = document.getElementById('btn_fem');
+const botaoElencoMasc = document.getElementById('btn_masc');
+const botaoElencoAll = document.getElementById('btn_all');
+
+
+
 const montaCard = (entrada) => {
     const card = document.createElement('div');
     card.style.display = 'grid';
@@ -111,7 +117,6 @@ const montaCard = (entrada) => {
 }
 
 
-
 inputPesquisa.onkeyup = (ev) => {
     console.log(ev.target.value);
     
@@ -161,15 +166,55 @@ const pegaDados = async (caminho) => {
     return dados;
 }
 
-pegaDados("https://botafogo-atletas.mange.li/2024-1/feminino").then(
-    (entrada) => {
-        dados = entrada;
-        conteudo.innerHTML = '';
-        dados.forEach(
-            (atleta) => {
-                conteudo.appendChild(montaCard(atleta));
-            }
-        )
-    });
+
+if (sessionStorage.getItem('logado')){
+    
+    botaoElencoFem.onclick = (ev) => {
+        pegaDados('https://botafogo-atletas.mange.li/2024-1/feminino').then(
+            (entrada) => {
+                dados = entrada;
+                conteudo.innerHTML = '';
+                dados.forEach(
+                    (atleta) => {
+                        conteudo.appendChild(montaCard(atleta));
+                    }
+                )
+            });
+    }
+    
+    botaoElencoMasc.onclick = (ev) => {
+        pegaDados('https://botafogo-atletas.mange.li/2024-1/masculino').then(
+            (entrada) => {
+                dados = entrada;
+                conteudo.innerHTML = '';
+                dados.forEach(
+                    (atleta) => {
+                        conteudo.appendChild(montaCard(atleta));
+                    }
+                )
+            });
+    }
+    
+    botaoElencoAll.onclick = (ev) => {
+        pegaDados('https://botafogo-atletas.mange.li/2024-1/all').then(
+            (entrada) => {
+                dados = entrada;
+                conteudo.innerHTML = '';
+                dados.forEach(
+                    (atleta) => {
+                        conteudo.appendChild(montaCard(atleta));
+                    }
+                )
+            });
+    }
+
+    document.getElementById('logout').onclick = () => {
+        sessionStorage.removeItem('logado');
+        window.location.href = 'index.html';
+    };
+}
+
+
+
 
 console.log('síncrono')

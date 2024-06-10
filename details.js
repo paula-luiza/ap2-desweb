@@ -81,35 +81,24 @@ const montaCard = (entrada) => {
     return card;
 }
 
-const acha_cookie = ( chave ) => {
-    const array_cookies = document.cookie.split("; ");
-    const procurado = array_cookies.find(
-        ( e ) => e.startsWith(`${chave}=`))
-    return procurado?.split('=')[1];
+
+if (sessionStorage.getItem('logado')){
+    
+    let obj = {}
+
+    obj = JSON.parse(localStorage.getItem('atleta'));
+
+    const parametros = new URLSearchParams(window.location.search);
+    obj.alturaPelaUrl = parametros.get('altura');
+    obj.elencoPelaUrl = parametros.get('elenco');
+
+    document.body.appendChild(montaCard(obj));
+
+    document.getElementById('logout').onclick = () => {
+        sessionStorage.removeItem('logado');
+        window.location.href = 'index.html';
+    };
 }
 
-let obj = {}
 
-// com cookies
-/*const array_cookies = document.cookie.split("; ");
-for (const par of array_cookies){
-    const partes = par.split('=');
-    obj[partes[0]] = partes[1];
-}*/
 
-// com localStorage item por item
-/*const tamanhoLocalStorage = localStorage.length;
-
-let chave;
-for (let i = 0; i < tamanhoLocalStorage; i++){
-    chave = localStorage.key(i);
-    obj[chave] = localStorage.getItem(chave);
-}*/
-
-obj = JSON.parse(localStorage.getItem('atleta'));
-
-const parametros = new URLSearchParams(window.location.search);
-obj.alturaPelaUrl = parametros.get('altura');
-obj.elencoPelaUrl = parametros.get('elenco');
-
-document.body.appendChild(montaCard(obj));
