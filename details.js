@@ -81,10 +81,25 @@ const montaCard = (entrada) => {
     return card;
 }
 
+const acha_cookie = ( chave ) => {
+    const array_cookies = document.cookie.split("; ");
+    const procurado = array_cookies.find(
+        ( e ) => e.startsWith(`${chave}=`))
+    return procurado?.split('=')[1];
+}
+
 
 if (sessionStorage.getItem('logado')){
     
     let obj = {}
+
+    const tamanhoLocalStorage = localStorage.length;
+
+    const array_cookies = document.cookie.split("; ");
+    for (const par of array_cookies){
+    const partes = par.split('=');
+    obj[partes[0]] = partes[1];
+    }
 
     obj = JSON.parse(localStorage.getItem('atleta'));
 
@@ -92,12 +107,28 @@ if (sessionStorage.getItem('logado')){
     obj.alturaPelaUrl = parametros.get('altura');
     obj.elencoPelaUrl = parametros.get('elenco');
 
-    document.body.appendChild(montaCard(obj));
+    card = montaCard(obj);
+    document.body.appendChild(card);
 
     document.getElementById('logout').onclick = () => {
         sessionStorage.removeItem('logado');
         window.location.href = 'index.html';
     };
+
+   /*
+    window.addEventListener('hashchange', () => {
+
+        const novaId = new URLSearchParams(window.location.search).get('id');
+        if (novaId !== card.dataset.id) {
+            card.remove();
+            document.cookie = ''
+            obj = JSON.parse(localStorage.getItem('atleta_' + novaId));
+            card = montaCard(obj);
+            document.body.appendChild(card);
+        }
+    });
+    */
+
 }
 
 

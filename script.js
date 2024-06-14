@@ -1,10 +1,10 @@
 let dados;
 
 const divPesquisa = document.createElement('div');
-divPesquisa.style.textAlign = 'center';
-divPesquisa.style.padding = '5px';
+divPesquisa.className = 'div_pesquisa'
 
 const inputPesquisa = document.createElement('input');
+inputPesquisa.className = 'pesquisa_input'
 inputPesquisa.type = 'text';
 inputPesquisa.name = 'pesquisa';
 
@@ -14,12 +14,8 @@ document.body.appendChild(divPesquisa);
 
 
 const conteudo = document.createElement('div');
-conteudo.style.display = 'flex';
-conteudo.style.flexWrap = 'wrap';
-conteudo.style.justifyContent = 'center';
-conteudo.style.alignItems = 'center';
-conteudo.style.gap = '10px';
-conteudo.innerHTML = 'carregando...';
+conteudo.className = 'conteudo';
+//conteudo.innerHTML = 'carregando...';
 
 document.body.appendChild(conteudo);
 
@@ -31,17 +27,7 @@ const botaoElencoAll = document.getElementById('btn_all');
 
 const montaCard = (entrada) => {
     const card = document.createElement('div');
-    card.style.display = 'grid';
-    card.style.gridTemplateColumns = '1fr 2fr';
-    card.style.gridTemplateAreas = `
-    "a1 a2"
-    "a1 a3"
-    "a4 a4"
-    "a5 a5"
-    `;
-    card.style.width = '30rem';
-    card.style.border = 'solid';
-    card.style.padding = '.3rem';
+    card.className = 'card';
 
     card.dataset.id = entrada.id;
     card.dataset.elenco = entrada.elenco;
@@ -58,51 +44,28 @@ const montaCard = (entrada) => {
 
 
     const imgContainer = document.createElement('div');
-    imgContainer.style.gridArea = 'a1';
-    imgContainer.style.display = 'flex';
-    imgContainer.style.alignItems = 'center';
-    imgContainer.style.justifyContent = 'center';
+    imgContainer.className = 'img_container';
 
     const imagem = document.createElement('img');
+    imagem.className = 'img_atleta'
     imagem.src = entrada.imagem;
     imagem.alt = `Foto de ${entrada.nome}`;
-    imagem.style.width = '7rem';
-    imagem.style.height = '7rem';
-    imagem.style.borderRadius = '50%';
-    imagem.style.objectFit = 'cover';
-    imagem.style.objectPosition = 'top';
 
     const posicao = document.createElement('p');
+    posicao.className = 'posicao'
     posicao.innerHTML = entrada.posicao;
-    posicao.style.cssText = `
-        grid-area: a2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-    `;
-    /*posicao.style.gridArea = 'a2';
-    posicao.style.display = 'flex';
-    posicao.style.alignItems = 'center';
-    posicao.style.justifyContent = 'center';
-    posicao.style.textTransform=  'uppercase';*/
 
     const nome = document.createElement('p');
+    nome.className = 'nome_atleta'
     nome.innerHTML = entrada.nome;
-    /*nome.className = 'nome';*/
-    nome.style.gridArea = 'a3';
-    nome.style.display = 'flex';
-    nome.style.alignItems = 'center';
-    nome.style.justifyContent = 'center';
-    nome.style.fontWeight = 'bold';
 
     const detalhes = document.createElement('p');
+    detalhes.className = 'detalhes_atleta'
     detalhes.innerHTML = entrada.detalhes;
-    detalhes.style.gridArea = 'a4';
 
     const nascimento = document.createElement('p');
+    nascimento.className = 'nascimento_atleta'
     nascimento.innerHTML = entrada.nascimento;
-    nascimento.style.gridArea = 'a5';
 
     card.appendChild(imgContainer);
     imgContainer.appendChild(imagem);
@@ -159,6 +122,13 @@ const handleClick = ( evento ) => {
     window.location.href = `detalhes.html?id=${card.dataset.id}`;
 }
 
+const acha_cookie = ( chave ) => {
+    const array_cookies = document.cookie.split("; ");
+    const procurado = array_cookies.find(
+        ( e ) => e.startsWith(`${chave}=`))
+    return procurado?.split('=')[1];
+}
+
 
 const pegaDados = async (caminho) => {
     const resposta = await fetch(caminho);
@@ -212,9 +182,7 @@ if (sessionStorage.getItem('logado')){
         sessionStorage.removeItem('logado');
         window.location.href = 'index.html';
     };
+
 }
-
-
-
 
 console.log('síncrono')

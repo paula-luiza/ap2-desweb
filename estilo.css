@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=PT+Sans+Narrow:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=PT+Sans+Narrow:wght@400;700&display=swap');
+
+body {
+    font-family: 'Manrope', sans-serif;
+}
+
+.div_pesquisa{
+    text-align: center;
+    padding: 5px;
+    background-color: blueviolet;
+}
+
+.pesquisa_input{
+    background-color: #000000;
+    color: blueviolet;
+}
+
+.conteudo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;   
+}
+
+#btn_fem, #btn_masc, #btn_all{
+    background-color: blueviolet;
+    color: aqua;
+}
+
+.card{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas:
+    'a1 a2'
+    'a1 a3'
+    'a4 a4'
+    'a5 a5';
+    width: 30rem;
+    border: solid;
+    padding: .3rem;
+}
+
+.img_container{
+    grid-area: 'a1';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_atleta{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.posicao{
+    grid-area: a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.nome_atleta{
+    grid-area: a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.detalhes_atleta{
+    grid-area: a4;
+}
+
+.nascimento_atleta{
+    grid-area: a5;
+}
+
+@media screen
+and (min-width: 768px){
+
+}
+
+@media screen
+and (min-width: 1024px){
+
+}
