@@ -31,13 +31,11 @@ body {
 }
 
 .card{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-areas:
-    'a1 a2'
-    'a1 a3'
-    'a4 a4'
-    'a5 a5';
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap ;
+    justify-content: space-between;
     width: 30rem;
     border: solid;
     padding: .3rem;
@@ -45,7 +43,6 @@ body {
 
 .img_container{
     grid-area: 'a1';
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -82,12 +79,22 @@ body {
     grid-area: a5;
 }
 
+/* até 768px */
 @media screen
 and (min-width: 768px){
+    
+    }
 
-}
 
-@media screen
-and (min-width: 1024px){
+/* até 1024px */
+@media (max-width: 1024px) {
 
-}
+    
+   }
+   
+   
+   /* após 1024px */
+   @media (min-width: 1024px) {
+   
+    
+   }
