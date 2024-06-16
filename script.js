@@ -19,10 +19,11 @@ conteudo.className = 'conteudo';
 
 document.body.appendChild(conteudo);
 
-const botaoElencoFem = document.getElementById('btn_fem');
+const botaoElencoFem = document.getElementById('btn_fem','btn_fem2');
 const botaoElencoMasc = document.getElementById('btn_masc');
 const botaoElencoAll = document.getElementById('btn_all');
 
+const select = document.getElementById('dropdown_btn')
 
 
 const montaCard = (entrada) => {
@@ -136,52 +137,52 @@ const pegaDados = async (caminho) => {
     return dados;
 }
 
+const carregaDados = async (url) => {
+    pegaDados(url).then(
+        (entrada) => {
+            dados = entrada;
+            conteudo.innerHTML = '';
+            dados.forEach(
+                (atleta) => {
+                    conteudo.appendChild(montaCard(atleta));
+                }
+            )
+        });
+    
+}
+
 
 if (sessionStorage.getItem('logado')){
     
     botaoElencoFem.onclick = (ev) => {
-        pegaDados('https://botafogo-atletas.mange.li/2024-1/feminino').then(
-            (entrada) => {
-                dados = entrada;
-                conteudo.innerHTML = '';
-                dados.forEach(
-                    (atleta) => {
-                        conteudo.appendChild(montaCard(atleta));
-                    }
-                )
-            });
+        carregaDados('https://botafogo-atletas.mange.li/2024-1/feminino')
     }
     
     botaoElencoMasc.onclick = (ev) => {
-        pegaDados('https://botafogo-atletas.mange.li/2024-1/masculino').then(
-            (entrada) => {
-                dados = entrada;
-                conteudo.innerHTML = '';
-                dados.forEach(
-                    (atleta) => {
-                        conteudo.appendChild(montaCard(atleta));
-                    }
-                )
-            });
+        carregaDados('https://botafogo-atletas.mange.li/2024-1/masculino')
     }
     
     botaoElencoAll.onclick = (ev) => {
-        pegaDados('https://botafogo-atletas.mange.li/2024-1/all').then(
-            (entrada) => {
-                dados = entrada;
-                conteudo.innerHTML = '';
-                dados.forEach(
-                    (atleta) => {
-                        conteudo.appendChild(montaCard(atleta));
-                    }
-                )
-            });
+        carregaDados('https://botafogo-atletas.mange.li/2024-1/all')
     }
 
     document.getElementById('logout').onclick = () => {
         sessionStorage.removeItem('logado');
         window.location.href = 'index.html';
     };
+
+    select.onchange = (e) => {
+
+        const valor = e.target.value;
+
+        if (valor === 'feminino'){
+            carregaDados('https://botafogo-atletas.mange.li/2024-1/feminino');
+        } else if (valor === 'masculino'){
+            carregaDados('https://botafogo-atletas.mange.li/2024-1/masculino');
+        } else if (valor === 'all'){
+            carregaDados('https://botafogo-atletas.mange.li/2024-1/all');
+        }
+    }
 
 }
 

@@ -18,11 +18,14 @@ body {
 }
 
 .conteudo{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
     justify-content: center;
+    justify-items: center;
     align-items: center;
-    gap: 10px;   
+    gap: 10px; 
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #btn_fem, #btn_masc, #btn_all{
@@ -30,21 +33,71 @@ body {
     color: aqua;
 }
 
+.dropdown_btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.dropdown_btn:hover {
+    background: #444;
+}
+
+.dropdown_menu {
+    display: none; /* Oculta o menu por padrão */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 150px;
+}
+  
+.dropdown_menu li {
+    margin-bottom: 10px;
+}
+  
+.dropdown_menu a {
+    text-decoration: none;
+    color: #333;
+}
+  
+.dropdown_menu a:hover {
+    color: #666;
+}
+  
+  
+.dropdown-menu.show {
+    display: block;
+}
+
 .card{
-    display: flex;
-    flex-direction: row;
-    display: flex;
-    flex-wrap: wrap ;
-    justify-content: space-between;
-    width: 30rem;
+    display: grid;
+    grid-column: span 1;
+    align-items: center;
+    justify-content: center;
+    max-width: 250px;
+    /*min-width: 100px;*/
+    height: 500px;
     border: solid;
     padding: .3rem;
+    margin: 10px;
+    grid-template-areas: 
+    "a1 a2"
+    "a1 a3"
+    "a4 a4"
+    "a5 a5"
+    ;
 }
 
 .img_container{
-    grid-area: 'a1';
     align-items: center;
     justify-content: center;
+    grid-area: a1;
+    display: flex;
 }
 
 .img_atleta{
@@ -52,15 +105,18 @@ body {
     height: 7rem;
     border-radius: 50%;
     object-fit: cover;
-    object-position: top;
+    object-position: right;
 }
 
 .posicao{
-    grid-area: a2;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    grid-area: a2;
+    display: flex;
 }
 
 .nome_atleta{
@@ -73,28 +129,64 @@ body {
 
 .detalhes_atleta{
     grid-area: a4;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .nascimento_atleta{
     grid-area: a5;
 }
 
+#dropdown_btn{
+    padding: 14px 20px;
+}
+
 /* até 768px */
-@media screen
-and (min-width: 768px){
-    
+@media screen and (max-width: 768px){
+    .conteudo {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .btn_elenco{
+        display: none;
+    }
+
+    #dropdown_btn{
+        display: flex;
     }
 
 
-/* até 1024px */
-@media (max-width: 1024px) {
+}
 
-    
+
+/* até 1024px */
+@media screen and (min-width:769px) and (max-width: 1024px) {
+    .conteudo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .btn_elenco{
+        display: flex;
+    }
+
+    #dropdown_btn{
+        display: none;
+    }
    }
    
    
    /* após 1024px */
-   @media (min-width: 1024px) {
-   
-    
+   @media (min-width: 1025px) {
+    .conteudo {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .btn_elenco{
+        display: flex;
+    }
+
+    #dropdown_btn{
+        display: none;
+    }
    }
