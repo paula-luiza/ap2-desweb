@@ -5,18 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>Atletas Botafogo</title>
-    <link rel="icon" type="image/png" href="/escudo.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/imagens/escudo.png" sizes="16x16">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <select name="elenco" id="dropdown_btn">
-        <option value="">Selecione o Elenco</option>
-        <option value="feminino">Feminino</option>
-        <option value="masculino">Masculino</option>
-        <option value="all">Completo</option>
-    </select>
+    <div class="header">
+        <p>Atletas Botafogo 2024.1</p>
+        <button id="logout">Sair</button>
+    </div>
 
-    <div>
+    <div class="div_dropdown">
+        <select name="elenco" id="dropdown_btn">
+            <option value="">Selecione o Elenco</option>
+            <option value="feminino">Feminino</option>
+            <option value="masculino">Masculino</option>
+            <option value="all">Completo</option>
+        </select>
+    </div>
+
+    <div class="buttons">
         <button class="btn_elenco" id="btn_fem">
             Feminino
         </button>
@@ -27,6 +34,5 @@
             Completo
         </button>
     </div>
-   <button id="logout">Sair</button>
 </body>
 </html>

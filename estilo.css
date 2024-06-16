@@ -8,13 +8,38 @@ body {
 
 .div_pesquisa{
     text-align: center;
-    padding: 5px;
-    background-color: blueviolet;
+    padding: 0 0 2em 0;
 }
 
 .pesquisa_input{
+    text-align: center;
+    line-height: 3em;
+    max-width: 80%;
+    width: 30em;
+    color: #666;
+}
+
+.header{
+    background-color: #c65f5f;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header p{
+    padding: 0 2rem 0 2rem;
+    font-weight: bold;
+}
+
+.header button{
+    padding: 0 2rem 0 2rem;
     background-color: #000000;
-    color: blueviolet;
+    color: #ffffff;
+    text-align: center;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    margin: 0 2rem;
 }
 
 .conteudo{
@@ -28,82 +53,83 @@ body {
     margin: 0 auto;
 }
 
-#btn_fem, #btn_masc, #btn_all{
-    background-color: blueviolet;
-    color: aqua;
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    max-width: 500px;
+    padding: 2em;
+    margin: 0 auto; 
 }
 
-.dropdown_btn {
+#btn_fem, #btn_masc, #btn_all{
+    background-color: black;
+    border: medium;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    font-size: 1.3em;
+    max-width: 6em;
+}
+
+.div_dropdown{
+    justify-content: center;
+
+}
+
+#dropdown_btn {
     background: #333;
     color: #fff;
     border: none;
-    padding: 10px 20px;
     cursor: pointer;
+    align-self: center;
+    padding: 2em 3em;
+    width: 15em;
+    margin: 2em auto 0 auto
 }
 
 .dropdown_btn:hover {
     background: #444;
 }
 
-.dropdown_menu {
-    display: none; /* Oculta o menu por padrão */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    width: 150px;
-}
-  
-.dropdown_menu li {
-    margin-bottom: 10px;
-}
-  
-.dropdown_menu a {
-    text-decoration: none;
-    color: #333;
-}
-  
-.dropdown_menu a:hover {
-    color: #666;
-}
-  
-  
-.dropdown-menu.show {
-    display: block;
-}
+/*=================== Card ====================== */
 
 .card{
-    display: grid;
-    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    /*grid-column: span 1;*/
     align-items: center;
     justify-content: center;
-    max-width: 250px;
+    width: 250px;
+    flex-shrink: 0;
+    cursor: pointer;
     /*min-width: 100px;*/
     height: 500px;
     border: solid;
     padding: .3rem;
     margin: 10px;
-    grid-template-areas: 
+    /*grid-template-areas: 
     "a1 a2"
     "a1 a3"
     "a4 a4"
-    "a5 a5"
+    "a5 a5"*/
     ;
 }
 
 .img_container{
-    align-items: center;
-    justify-content: center;
-    grid-area: a1;
-    display: flex;
+    width: 220px;
+    object-fit: none;
+    height: 300px;
+    object-position: 100% 10%;
 }
 
 .img_atleta{
-    width: 7rem;
-    height: 7rem;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: right;
 }
@@ -115,16 +141,29 @@ body {
     text-transform: uppercase;
     text-align: center;
     font-weight: bold;
-    grid-area: a2;
-    display: flex;
+    background-color: #000000;
+    color: #666;
+    width: 100%;
 }
 
 .nome_atleta{
+    display: block;
     grid-area: a3;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    text-align: center;
+    place-content: center;
+    flex-direction: column;
+}
+
+.btn_detalhes{
+    background-color: #f8c600;
+    text-transform: uppercase;
+    display: block;
+    width: 100%;
+    grid-column: 1 / -1;
 }
 
 .detalhes_atleta{
@@ -142,6 +181,71 @@ body {
     padding: 14px 20px;
 }
 
+/* ================= Página Index/Inicio ================ */
+
+.index{
+    background-color: #000000;
+}
+
+.container_inicio{
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    padding: 2rem;
+ 
+}
+
+.intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.container_escudo{
+    display: flex;
+    width: 100px;
+}
+
+.container_escudo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.msg_inicio{
+    text-align: center;
+}
+
+.msg_inicio h1{
+    font-family: Aleo;
+    justify-self: center;
+}
+
+.msg_inicio h3{
+    font-size: 12px;
+    justify-self: center;
+}
+
+.div_senha{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#mensagem{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ====================== Media Queries ========================= */
 /* até 768px */
 @media screen and (max-width: 768px){
     .conteudo {
@@ -156,6 +260,9 @@ body {
         display: flex;
     }
 
+    .container_inicio{
+        flex-direction: column;
+    }
 
 }
 
@@ -173,6 +280,12 @@ body {
     #dropdown_btn{
         display: none;
     }
+
+    .container_inicio{
+        flex-direction: row;
+        margin: 25vh 0 0 0;  
+    }
+
    }
    
    
@@ -188,5 +301,10 @@ body {
 
     #dropdown_btn{
         display: none;
+    }
+
+    .container_inicio{
+        flex-direction: row;
+        margin: 25vh 0 0 0;  
     }
    }

@@ -5,17 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
     <title>Atletas Botafogo</title>
-    <link rel="icon" type="image/png" href="/escudo.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/imagens/escudo.png" sizes="16x16">
     <script src="md5.js"></script>
     <script src="sha256.js"></script>
     <script src="autorizacao.js" defer></script>
 </head>
-<body>
-    <label>
-        Senha:
-        <input type="password" id="senha">
-    </label>
-    <button id="btn_login">Entrar</button>
-    <div id="mensagem"></div>
+<body class="index">
+    <section class="container_inicio">
+        <div class="intro">
+            <div class="container_escudo">
+                <img class="escudo" 
+                    src="/imagens/logo-botafogo.jpg" 
+                    alt="Escudo retrô do Botafogo">
+            </div>
+            <div class="msg_inicio">
+                <h1>Atletas do Botafogo em 2024.1</h1>
+                <h3>Trabalho da disciplina Desenvolvimento Web do Ibmec-Rio</h3>
+            </div>
+        </div>
+        <div class="div_senha">
+            <label id="input_senha">
+                <input type="password" id="senha"  placeholder="Senha">
+            </label>
+            <p class="reveal_senha">Utilize para entrar: senha</p>
+            <button id="btn_login">Entrar</button>
+            <div id="mensagem"></div>
+        </div>
+    </section>
+    
 </body>
 </html>

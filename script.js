@@ -7,6 +7,7 @@ const inputPesquisa = document.createElement('input');
 inputPesquisa.className = 'pesquisa_input'
 inputPesquisa.type = 'text';
 inputPesquisa.name = 'pesquisa';
+inputPesquisa.placeholder = 'Busque por nome ou posição';
 
 divPesquisa.appendChild(inputPesquisa);
 
@@ -68,12 +69,17 @@ const montaCard = (entrada) => {
     nascimento.className = 'nascimento_atleta'
     nascimento.innerHTML = entrada.nascimento;
 
+    const botao = document.createElement('button');
+    botao.className = 'btn_detalhes'
+    botao.innerHTML = 'Saiba Mais'
+
     card.appendChild(imgContainer);
     imgContainer.appendChild(imagem);
     card.appendChild(posicao);
     card.appendChild(nome);
-    card.appendChild(detalhes);
-    card.appendChild(nascimento);
+    card.appendChild(botao);
+    //card.appendChild(detalhes);
+    //card.appendChild(nascimento);
 
     card.onclick = handleClick;
 
