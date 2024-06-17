@@ -246,6 +246,11 @@ body {
     text-align: center;
 }
 
+.msg_deslogado{
+    text-align: center;
+    padding: 2rem;
+}
+
 .msg_inicio h1{
     font-family: Aleo;
     justify-self: center;

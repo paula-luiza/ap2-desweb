@@ -45,7 +45,7 @@ const montaCard = (entrada) => {
     card.dataset.no_botafogo_desde = entrada.no_botafogo_desde;
 
 
-    const imgContainer = document.createElement('div');
+    const imgContainer = document.createElement('area');
     imgContainer.className = 'img_container';
 
     const imagem = document.createElement('img');
@@ -82,6 +82,10 @@ const montaCard = (entrada) => {
     //card.appendChild(nascimento);
 
     card.onclick = handleClick;
+    imagem.onclick = () => {
+        card.onclick();
+        
+    }
 
     return card;
 }
@@ -190,6 +194,16 @@ if (sessionStorage.getItem('logado')){
         }
     }
 
+}else {
+    const autorizacao = document.createElement('h3');
+    autorizacao.className = 'msg_deslogado'
+    autorizacao.innerHTML = 'Você deve estar logado para acessar as informações desta página.';
+    document.body.appendChild(autorizacao);
+
+    document.getElementById('logout').onclick = () => {
+        sessionStorage.removeItem('logado');
+        window.location.href = 'index.html';
+    };
 }
 
 console.log('síncrono')

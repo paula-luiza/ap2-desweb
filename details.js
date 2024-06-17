@@ -147,7 +147,7 @@ if (sessionStorage.getItem('logado')){
 } else {
     const autorizacao = document.createElement('h3');
     autorizacao.className = 'msg_deslogado'
-    autorizacao.innerHTML = 'Você deve estar logado para acessar esta página.';
+    autorizacao.innerHTML = 'Você deve estar logado para acessar as informações desta página.';
     document.body.appendChild(autorizacao);
 
     document.getElementById('logout').onclick = () => {
