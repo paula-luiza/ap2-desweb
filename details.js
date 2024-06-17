@@ -41,19 +41,19 @@ const montaCard = (entrada) => {
 
     const n_jogos = document.createElement('p');
     n_jogos.className = 'jogos_article';
-    n_jogos.innerHTML = entrada.n_jogos;  
+    n_jogos.innerHTML = `Jogos pelo Botafogo: ${entrada.n_jogos}`;  
 
     const naturalidade = document.createElement('p');
     naturalidade.className = 'naturalidade';
-    naturalidade.innerHTML = entrada.naturalidade;  
+    naturalidade.innerHTML = `Naturalidade: ${entrada.naturalidade}`;  
 
     const no_bota = document.createElement('p');
     no_bota.className = 'no_botafogo';
-    no_bota.innerHTML = entrada.no_botafogo_desde; 
+    no_bota.innerHTML = `No Botafogo desde: ${entrada.no_botafogo_desde}`; 
 
     const nascimento = document.createElement('p');
     nascimento.className = 'nascimento_article';
-    nascimento.innerHTML = `${entrada.nascimento} | Elenco: ${entrada.elenco} | Altura: ${entrada.altura}`;
+    nascimento.innerHTML = `Nascimento: ${entrada.nascimento} | Elenco: ${entrada.elenco} | Altura: ${entrada.altura}`;
 
     const voltar = document.createElement('button');
     voltar.className = 'voltar_button';
