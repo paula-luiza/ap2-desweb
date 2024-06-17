@@ -1,16 +1,6 @@
 const montaCard = (entrada) => {
     const card = document.createElement('article');
-    card.style.display = 'grid';
-    card.style.gridTemplateColumns = '1fr 2fr';
-    card.style.gridTemplateAreas = `
-    "a1 a2"
-    "a1 a3"
-    "a4 a4"
-    "a5 a5"
-    `;
-    card.style.width = '30rem';
-    card.style.border = 'solid';
-    card.style.padding = '.3rem';
+    card.className = 'article';
 
     card.dataset.id = entrada.id;
     card.dataset.elenco = entrada.elenco;
@@ -21,62 +11,69 @@ const montaCard = (entrada) => {
     card.dataset.nomeCompleto = entrada.nome_completo;
     card.dataset.nascimento = entrada.nascimento;
     card.dataset.altura = entrada.altura;
+    card.dataset.n_jogos = entrada.n_jogos;
+    card.dataset.naturalidade = entrada.naturalidade;
+    card.dataset.no_botafogo_desde = entrada.no_botafogo_desde;
 
    
     const imgContainer = document.createElement('div');
-    imgContainer.style.gridArea = 'a1';
-    imgContainer.style.display = 'flex';
-    imgContainer.style.alignItems = 'center';
-    imgContainer.style.justifyContent = 'center';
+    imgContainer.className = 'img_container_article';
 
     const imagem = document.createElement('img');
+    imagem.className = 'img_article';
     imagem.src = entrada.imagem;
     imagem.alt = `Foto de ${entrada.nome}`;
-    imagem.style.width = '7rem';
-    imagem.style.height = '7rem';
-    imagem.style.borderRadius = '50%';
-    imagem.style.objectFit = 'cover';
-    imagem.style.objectPosition = 'top';
+
+    const detContainer = document.createElement('div');
+    detContainer.className = 'detail_container';
 
     const posicao = document.createElement('p');
-    posicao.innerHTML = `Posição: ${entrada.posicao}`;
-    posicao.style.cssText = `
-        grid-area: a2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-transform: uppercase;
-    `;
-    /*posicao.style.gridArea = 'a2';
-    posicao.style.display = 'flex';
-    posicao.style.alignItems = 'center';
-    posicao.style.justifyContent = 'center';
-    posicao.style.textTransform=  'uppercase';*/
+    posicao.className = 'posicao_article';
+    posicao.innerHTML = `${entrada.posicao}`;
 
     const nome = document.createElement('p');
-    nome.innerHTML = `Nome: ${entrada.nome}`;
-    /*nome.className = 'nome';*/
-    nome.style.gridArea = 'a3';
-    nome.style.display = 'flex';
-    nome.style.alignItems = 'center';
-    nome.style.justifyContent = 'center';
-    nome.style.fontWeight = 'bold';
+    nome.className = 'nome_article';
+    nome.innerHTML = `${entrada.nome}`;
 
     const detalhes = document.createElement('p');
-    detalhes.innerHTML = entrada.detalhes;
-    detalhes.style.gridArea = 'a4';
-    
+    detalhes.className = 'detalhes_article';
+    detalhes.innerHTML = entrada.detalhes;  
+
+    const n_jogos = document.createElement('p');
+    n_jogos.className = 'jogos_article';
+    n_jogos.innerHTML = entrada.n_jogos;  
+
+    const naturalidade = document.createElement('p');
+    naturalidade.className = 'naturalidade';
+    naturalidade.innerHTML = entrada.naturalidade;  
+
+    const no_bota = document.createElement('p');
+    no_bota.className = 'no_botafogo';
+    no_bota.innerHTML = entrada.no_botafogo_desde; 
 
     const nascimento = document.createElement('p');
-    nascimento.innerHTML = `${entrada.nascimento} | Elenco: ${entrada.elencoPelaUrl} | Altura: ${entrada.alturaPelaUrl}`;
-    nascimento.style.gridArea = 'a5';
+    nascimento.className = 'nascimento_article';
+    nascimento.innerHTML = `${entrada.nascimento} | Elenco: ${entrada.elenco} | Altura: ${entrada.altura}`;
+
+    const voltar = document.createElement('button');
+    voltar.className = 'voltar_button';
+    voltar.innerHTML = 'Voltar';
+    voltar.onclick = () => {
+        window.location.href = 'home.html'
+    }
 
     card.appendChild(imgContainer);
     imgContainer.appendChild(imagem);
-    card.appendChild(posicao);
-    card.appendChild(nome);
-    card.appendChild(detalhes);
-    card.appendChild(nascimento);
+    card.appendChild(detContainer);
+    detContainer.appendChild(nome);
+    detContainer.appendChild(posicao);
+    detContainer.appendChild(detalhes);
+    detContainer.appendChild(n_jogos);
+    detContainer.appendChild(naturalidade);
+    detContainer.appendChild(no_bota);
+    detContainer.appendChild(nascimento);
+    detContainer.appendChild(voltar);
+
 
     return card;
 }
@@ -86,6 +83,12 @@ const acha_cookie = ( chave ) => {
     const procurado = array_cookies.find(
         ( e ) => e.startsWith(`${chave}=`))
     return procurado?.split('=')[1];
+}
+
+async function AtletaPorId(id) {
+    const response = await fetch(`https://botafogo-atletas.mange.li/2024-1/${id}`);
+    const data = await response.json();
+    return data;
 }
 
 
@@ -107,27 +110,50 @@ if (sessionStorage.getItem('logado')){
     obj.alturaPelaUrl = parametros.get('altura');
     obj.elencoPelaUrl = parametros.get('elenco');
 
-    card = montaCard(obj);
-    document.body.appendChild(card);
+    const url = new URLSearchParams(window.location.search);
+    const idAtleta = url.get('id');
+    
+
+    if (idAtleta > 60) {
+        const erro = document.createElement('h3');
+        erro.className = 'msg_erro';
+        erro.innerHTML = 'Oops! Atleta não encontrado :(';
+        document.body.appendChild(erro);
+    } else {
+        card = montaCard(obj);
+        document.body.appendChild(card);
+    }
 
     document.getElementById('logout').onclick = () => {
         sessionStorage.removeItem('logado');
         window.location.href = 'index.html';
     };
-
-   /*
-    window.addEventListener('hashchange', () => {
+    
+    window.onload = () => {
 
         const novaId = new URLSearchParams(window.location.search).get('id');
         if (novaId !== card.dataset.id) {
             card.remove();
             document.cookie = ''
-            obj = JSON.parse(localStorage.getItem('atleta_' + novaId));
-            card = montaCard(obj);
-            document.body.appendChild(card);
+            AtletaPorId(novaId).then(data => {
+                obj = data;
+                card = montaCard(obj);
+                document.body.appendChild(card);
+            });
         }
-    });
-    */
+    };
+
+
+} else {
+    const autorizacao = document.createElement('h3');
+    autorizacao.className = 'msg_deslogado'
+    autorizacao.innerHTML = 'Você deve estar logado para acessar esta página.';
+    document.body.appendChild(autorizacao);
+
+    document.getElementById('logout').onclick = () => {
+        sessionStorage.removeItem('logado');
+        window.location.href = 'index.html';
+    };
 
 }
 
