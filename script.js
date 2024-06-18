@@ -45,7 +45,7 @@ const montaCard = (entrada) => {
     card.dataset.no_botafogo_desde = entrada.no_botafogo_desde;
 
 
-    const imgContainer = document.createElement('area');
+    const imgContainer = document.createElement('span');
     imgContainer.className = 'img_container';
 
     const imagem = document.createElement('img');
